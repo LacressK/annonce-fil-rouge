@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block title %}Accueil{% endblock %}
+
+{% block main %}
+    <div class="container py-4">
+            <div class="alert alert-light alert-dismissible fade show" role="alert">
+                <span>{{ messageErreur }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+body 
+{
+	background-image: url("/src/Web/image/background/modern-chrismas-background-1366.jpg");
+	background-color: #9a000c;
+	background-position-x: center;
+	background-position-y: top;
+	background-size: 50%;
+	background-repeat: no-repeat;
+}
+
+.card-img-top[data-clickable=true]{
+	cursor: pointer;
+  }
+
+.card-img-top 
+{
+	width : 100%;
+	height : auto;	
+}
+
+.img-annonce 
+{
+	width : 100%;
+	height : auto;
+}
+
+/* .error-message 
+{
+	background: url(/src/Web/image/icons/times-solid.svg) 10px center no-repeat;
+	color: #9a000c;
+	display: inline;
+	display: none;
+} */
+

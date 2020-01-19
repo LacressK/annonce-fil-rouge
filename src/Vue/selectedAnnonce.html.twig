@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+{% block title %}{% endblock %}
+
+{% block main %}
+
+    <div class="selectedAnnonce-display py-4">
+
+        <div class="container">
+        
+            <div class="row bg-light rounded py-1">
+                <div class="col col-md-4 border-right">     {# Colone image #}
+
+                {% if image %}
+                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                        <ul class="carousel-indicators">
+                        {% set active = true %}
+                        {% for items in image %}
+                            {% if active == true %}
+                                <li data-target="#imageCarousel" data-slide-to="1" class="active">
+                                {% set active = false %}
+                            {% else %}
+                            {% set i = 1 %}
+                                <li data-target="#imageCarousel" data-slide-to="{{ i + 1 }}">
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+
+                        <div class="carousel-inner">
+                            {% set active = true %}
+                            {% for items in image %}
+                                {% if active == true %}
+                                    <div class="carousel-item active">
+                                        <img src="{{ items.chemin }}" alt="Carrousel slide 1" class="d-block w-100"/>
+                                    </div>
+                                    {% set active = false %}
+                                {% else %}
+                                    <div class="carousel-item">
+                                    {% set i = 1 %}
+                                        <img src="{{ items.chemin }}" alt="Carrousel slide {{ i + 1 }}" class="d-block w-100"/>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Précédent</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Suivant</span>
+                    </a>
+                    {% else %}
+
+                    <img src="/src/Web/image/thumbnails_annonces/No_Image_Available.jpg" alt="No Image" class="d-block w-100"/>
+
+                    {% endif %}
+
+
+                </div>
+
+                <div class="col col-md-6 border-right">
+                    <h1 class="text-center">{{ annonce.entete }}</h1>
+                    <p>{{ annonce.corps }}</p>
+                </div>
+                <div class="col col-md-2 border-right">
+                    <span><p class="text-center bg-warning rounded">{{ annonce.rubrique.libelle }}</p></span>
+                    <span><p class="text-center">{{ annonce.utilisateur.username }}</p></span>
+                    <span><p class="text-center">#date_depot</p></span>
+                    <span><p class="text-center">#date_validite</p></span>
+                </div>
+            <div>
+        </div>
+    </div>
+
+{% endblock %}

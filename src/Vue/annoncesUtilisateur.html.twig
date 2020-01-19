@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+{% block title %}Annonces {{ session.username }} {% endblock %}
+
+{% block main %}
+
+    <div class="selectedAnnonce-display py-4">
+        <div class="container">
+
+            {% if message != NULL %}
+                <div class="container">
+                    <div class="alert alert-light alert-dismissible fade show" role="alert">
+                        <span>{{ message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% for items in annonce %}
+                <div class="row bg-light rounded py-1 mb-3 border border-secondary">
+                    <div class="col col-md-4 border-right">
+                        <img class="img-annonce" src="/src/Web/image/thumbnails_annonces/No_Image_Available.jpg" alt="Image Annonce"/>
+                    </div>
+                    <div class="col col-md-6 border-right">
+                        <h1 class="text-center">{{ items.entete }}</h1>
+                        <p>{{ items.corps }}</p>
+                    </div>
+                    <div class="col col-md-2 border-right">
+                        <span><p class="text-center bg-warning rounded">{{ items.rubrique.libelle }}</p></span>
+                        <span><p class="text-center">{{ items.utilisateur.username }}</p></span>
+                        <span><p class="text-center">#date_depot</p></span>
+                        <span><p class="text-center">#date_validite</p></span>
+                        {% if session.utilisateur.id_utilsateur == items.utilisateur.id_utilsateur %}
+                            <button type="button" class="btn btn-secondary col mx-1 mb-1" data-toggle="modal" data-target="#modalEdit{{ items.id_annonce }}">Modifier</button>
+                            <div class="modal fade" id="modalEdit{{ items.id_annonce }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-md" role="form">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modifier</h5>
+                                            <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <fieldset>
+                                                <form class="form-group" action="?Etat=modifierAnnonce&amp;modifierAnnonceID={{ items.id_annonce }}" method="POST">
+                                                    
+                                                    <label for="selectionRub">Rubriques</label>
+                                                    <select class="form-control" name="selectionRub">
+                                                        {% for items in rubriques %}
+                                                            <option value="{{ items.libelle }}">{{ items.libelle }}</option>
+                                                        {% endfor %}
+                                                    </select>
+
+                                                    <label for="entete">En-tête :</label>
+                                                    <input type="text" class="form-control" name="entete"/>
+                                                    <label for="corps">Corps :</label>
+                                                    <textarea type="text" class="form-control" name="corps"></textarea>
+                                                    <button type="submit" class="btn btn-secondary mt-2 form-control" name="submit">Envoyer</button>
+                                                </form>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="?Etat=supprimerAnnonce&amp;supprimerAnnonceID={{ items.id_annonce }}" type="button" class="btn btn-secondary col mx-1 mb-1">Supprimer</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

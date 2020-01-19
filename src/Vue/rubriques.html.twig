@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+{% block title %}Rubriques{% endblock %}
+
+{% block main %}
+
+    <div class="rubriques-display py-4">
+        <div class="container">
+
+        {% if message != NULL %}
+            <div class="container">
+                <div class="alert alert-light alert-dismissible fade show" role="alert">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+            </div>
+        {% endif %}
+
+            {% if session.admin == true %}
+            <div class="{#container-fluid#}bg-warning rounded mb-2 py-1 pl-2">
+                <h1 class="d-inline" style="font-size : 16px;"> Options administrateur : </h2>
+                <button type="button" class="btn btn-secondary {#position-fixed#}" {#style="bottom: 0px; right : 0px;"#} data-toggle="modal" data-target="#modal_addRub">Ajouter</button>
+                <div class="modal fade" id="modal_addRub" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="form">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Ajouter</h5>
+                                <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <fieldset>
+                                    <form class="form-group" action="?Etat=ajouterRubriques" method="POST">
+                                        <label for="newRubrique">Libelle :</label>
+                                        <input type="text" class="form-control" name="newRubrique" id="newRubrique"/>
+                                        <button type="submit" class="btn btn-secondary mt-2 form-control" name="submitAddRubrique" id="submitAddRubrique">Envoyer</button>
+                                    </form>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+
+            {% for items in listRubrique %}
+                <div class="col-md-4 mb-3">
+                    <div class="card md-4 shadow">
+                        <!-- Ajouter Image dans BDD Rubriques -->
+                        <img class="card-img-top" data-clickable="true" data-href="?Etat=selectedRubrique&amp;rubriqueID={{ items.id_rubrique }}" 
+                            src="/src/Web/image/thumbnails_annonces/No_Image_Available.jpg" alt="Annonce Image"/>
+
+                        <div class="card-body">
+                            <h2 class="card-text text-center" style="font-size: 16px;">{{ items }}</h2>
+                        </div>
+                        {% if session.admin == true %}
+                        <div class="card-footer row">
+                            <a href="?Etat=supprimerRubriques&amp;ID={{ items.id_rubrique }}" type="button" class="btn btn-secondary col mx-1">Supprimer</a>
+                            <button type="button" class="btn btn-secondary col mx-1" data-toggle="modal" data-target="#modal{{ items.id_rubrique }}">Modifier</button>
+
+                            <div class="modal fade" id="modal{{ items.id_rubrique }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-md" role="form">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modifier</h5>
+                                            <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <fieldset>
+                                                <form class="form-group" action="?Etat=modifierRubriques&amp;ID={{ items.id_rubrique }}" method="POST">
+                                                    <label for="updRubrique">Libelle :</label>
+                                                    <input type="text" class="form-control" name="updRubrique" id="updRubrique"/>
+                                                    <button type="submit" class="btn btn-secondary mt-2 form-control" name="submitEditRubrique" id="submitEditRubrique">Envoyer</button>
+                                                </form>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block pagination %}
+    {% include "pagination.html.twig" %}
+{% endblock %}

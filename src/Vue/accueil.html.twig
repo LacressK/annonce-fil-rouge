@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block title %}Accueil{% endblock %}
+
+{% block main %}
+    <div class="annonces-display py-4">
+        <div class="container">
+
+            {% if message != NULL %}
+            <div class="container">
+                <div class="alert alert-light alert-dismissible fade show" role="alert">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                {% for items in annonces %}
+                <div class="col-md-4 mb-3">
+                    <div class="card md-4 shadow">
+                        <img class="card-img-top" data-clickable="true" data-href="?Etat=selectedAnnonce&amp;annonceID={{ items.id_annonce }}" src="/src/Web/image/thumbnails_annonces/No_Image_Available.jpg" alt="Annonce Image"/>
+                        <div class="card-body">
+                            <h2 class="card-text text-center" style="font-size: 16px;">{{ items.entete }}<span class="badge badge-warning mx-1">{{ items.rubrique.libelle}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block pagination %}
+    {% include "pagination.html.twig" %}
+{% endblock %}

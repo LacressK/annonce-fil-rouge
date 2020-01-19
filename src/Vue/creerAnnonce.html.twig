@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+{% block title %}Créer une nouvelle annonce{% endblock %}
+
+{% block main %}
+
+        <div class="container py-4">
+        <form action="?Etat=creerAnnonce" method="POST">
+            <fieldset class="bg-light px-5 py-2 rounded">
+                <h1  class="text-center">Créer une nouvelle annonce</h1>
+                <hr>
+                <div class="form-group">
+                    <label for="entete">En-tête </label>
+                    <input class="form-control" type="text" name="entete" id="entete"/>
+                </div>
+                <div class="form-group">
+                    <label for="corps">Corps</label>
+                    <textarea class="form-control" type="text" name="corps" id="corps"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dateV">Date de validite</label>
+                    <input class="form-control" type="date" name="dateV" id="dateV"/>
+                </div>
+                <div class="form-group">
+                    <label for="selectionRub">Rubriques</label>
+                    <select class="form-control" name="selectionRub">
+                        {% for items in rubriques %}
+                            <option value="{{ items.libelle }}">{{ items.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button class="btn btn-secondary" type="submit" id="formSubmit">Envoyer</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+[7449] Log opened at 2020-01-13 08:03:55
+[7449] I: Connecting to configured address/port: 127.0.0.5:9000.
+[7449] W: Creating socket for '127.0.0.5:9000', poll success, but error: Operation now in progress (29).
+[7449] E: Could not connect to client. :-(
+[7449] Log closed at 2020-01-13 08:03:55
+
+[7450] Log opened at 2020-01-13 08:47:14
+[7450] I: Connecting to configured address/port: 127.0.0.5:9000.
+[7450] W: Creating socket for '127.0.0.5:9000', poll success, but error: Operation now in progress (29).
+[7450] E: Could not connect to client. :-(
+[7450] Log closed at 2020-01-13 08:47:14
+

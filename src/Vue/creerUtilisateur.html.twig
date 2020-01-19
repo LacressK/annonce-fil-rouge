@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+{% block title %}Creation de compte{% endblock %}
+
+{% block main %}
+
+    <div class="container py-4">
+        <form action="?Etat=creerUtilisateur" method="POST">
+            <fieldset class="bg-light px-5 py-2 rounded">
+                <h1  class="text-center">Créez un compte</h1>
+                <hr>
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input class="form-control" type="text" name="nom" id="nom"/>
+                    {# <span class="error-message">erreur</span> #}
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prenom</label>
+                    <input class="form-control" type="text" name="prenom" id="prenom"/>
+                </div>
+                <div class="form-group">
+                    <label for="mail">Adresse e-mail</label>
+                    <input class="form-control" type="email" name="mail" id="mail"/>
+                </div>
+                <div class="form-group">
+                    <label for="pseudo">Pseudonyme</label>
+                    <input class="form-control" type="text" name="pseudo" id="pseudo"/>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="mdp">Mot de passe</label>
+                        <input class="form-control" type="password" name="mdp" id="mdp"/>
+                    </div>
+                    <div class="col">
+                        <label for="mdpconf">Confirmez votre mot de passe</label>
+                        <input class="form-control" type="password" name="mdpconf" id="mdpConf"/>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button class="btn btn-secondary" type="submit" id="submitUser">Envoyer</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+{% endblock %}
