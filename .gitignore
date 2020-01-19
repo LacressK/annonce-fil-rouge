@@ -1,3 +1,4 @@
-.vscode
 /scripts_bdd
+/src/phpinfo.php
+.vscode
 *.sql
