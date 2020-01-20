@@ -1,3 +1,4 @@
+/vendor
 /scripts_bdd
 /src/phpinfo.php
 .vscode
